@@ -107,5 +107,15 @@ function rm(vehicle) {
 }
 
 function reverse() {
-    console.log('flip wagons');
+    const list = document.getElementById('wagons');
+    let divs = [];
+    for (let i = 0; i < list.children.length; i++) {
+        divs[i] = list.children[i];
+    }
+    list.innerHTML = '';
+    for (let i = divs.length-1; i > -1; i--) {
+        list.innerHTML += divs[i].outerHTML;
+    }
+    inp.innerHTML = '';
+    inp.classList = '';
 }

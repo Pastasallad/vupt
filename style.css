@@ -1,11 +1,14 @@
 :root {
     --orange: #FAB700;
+    --bg: #000;
+    --secondary: #999;
+    --text: #fff;
 }
 body {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--bg);
+    color: var(--text);
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    font-size: 28px;
+    font-size: 26px;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -16,7 +19,8 @@ body {
 }
 a {color: #666;text-decoration: none;}
 #input {margin: 0; font-size: 42px;}
-input {background-color: #000;color: #fff;font-size: 24px;}
+#flip {line-height: 1em; cursor: pointer; color: var(--secondary);}
+input {background-color: var(--bg);color: var(--text);font-size: 24px;}
 header, section, footer {margin: 0 10px;}
 header {margin: 10px;}
 section {
