@@ -13,8 +13,10 @@ for (let key of keys) {
                 corr();
                 break;
             case 'TOM':
+                createMail(false);
+                break;
             case 'LAST':
-                console.log('skapa mejl');
+                createMail(true);
                 break;
             default:
                 enter(value);
@@ -118,4 +120,27 @@ function reverse() {
     }
     inp.innerHTML = '';
     inp.classList = '';
+}
+
+function createMail(load) {
+    const subject = 'Vupt ' + document.getElementById('otn').value + ' ' + document.getElementById('route').value;
+    const loaded = (load) ? 'lastade' : 'tomma';
+    const wagons = document.getElementById('wagons').children;
+    // New line = %0D%0A
+    let body = 'Hej!%0D%0A%0D%0A' + wagons.length + ' '+ 
+    loaded + ' vagnar.%0D%0A%0D%0A';
+
+    for (const loco of document.getElementById('locos').children) {
+        body += loco.innerHTML;
+        body += (loco.classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
+    }
+
+    body += '%0D%0A';
+
+    for (let i = 0; i < wagons.length; i++) {
+        body += wagons[i].innerHTML;
+        body += (wagons[i].classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
+        body += ((i+1) % 5 === 0) ? '%0D%0A' : '';
+    }
+    window.location = 'mailto:test@mail.abc?subject=' + subject + '&body=' + body;
 }
