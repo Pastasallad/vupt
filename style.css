@@ -1,0 +1,53 @@
+:root {
+    --orange: #FAB700;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-size: 28px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, auto) 1fr auto;
+    height: 100vh;
+    user-select: none;
+    width: clamp(300px, 100%, 960px);
+}
+a {color: #666;text-decoration: none;}
+#input {margin: 0; font-size: 42px;}
+input {background-color: #000;color: #fff;font-size: 24px;}
+header, section, footer {margin: 0 10px;}
+header {margin: 10px;}
+section {
+    display: flex;
+    justify-content: center;
+}
+footer {text-align: center;}
+.input-field {align-items: flex-end;}
+#wagons, #locos, #numpad {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 5px;
+}
+#wagons div, #locos div, #numpad div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    cursor: pointer;
+    min-height: 1.5em;
+}
+#wagons div:active, #locos div:active, #numpad div:active { background-color: var(--orange); }
+#locos {grid-template-columns: repeat(3,1fr);}
+#numpad {
+    grid-template-columns: repeat(4,1fr);
+    margin-bottom: 10px;
+}
+#numpad div {
+    min-height: 2.5em;
+}
+.valid {color: green;}
+.caution {color: var(--orange);}
+.warning {color: red;}
