@@ -105,3 +105,7 @@ function rm(vehicle) {
         getWagons();
     }
 }
+
+function reverse() {
+    console.log('flip wagons');
+}
