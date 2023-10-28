@@ -19,7 +19,7 @@ body {
 }
 a {color: #666;text-decoration: none;}
 #input {margin: 0; font-size: 42px;}
-#flip {line-height: 1em; cursor: pointer; color: var(--secondary);}
+#flip {line-height: 1.3em; cursor: pointer; color: var(--secondary);}
 input {background-color: var(--bg);color: var(--text);font-size: 24px;}
 header, section, footer {margin: 0 10px;}
 header {margin: 10px;}
