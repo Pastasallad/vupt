@@ -123,7 +123,8 @@ function reverse() {
 }
 
 function createMail(load) {
-    const subject = 'Vupt ' + document.getElementById('otn').value + ' ' + document.getElementById('route').value;
+    const date = new Date().toISOString().substring(0,10)
+    const subject = 'Vagnsupptagning ' + document.getElementById('otn').value + ' ' + document.getElementById('route').value + ' ' + date;
     const loaded = (load) ? 'lastade' : 'tomma';
     const wagons = document.getElementById('wagons').children;
     // New line = %0D%0A
@@ -142,5 +143,5 @@ function createMail(load) {
         body += (wagons[i].classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
         body += ((i+1) % 5 === 0) ? '%0D%0A' : '';
     }
-    window.location = 'mailto:test@mail.abc?subject=' + subject + '&body=' + body;
+    window.location = 'mailto:?subject=' + subject + '&body=' + body;
 }
