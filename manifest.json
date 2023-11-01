@@ -1,6 +1,6 @@
 {
     "name": "Vagnsupptagning",
-    "short_name": "VUPT",
+    "short_name": "Vupt",
     "start_url": "/",
     "icons": [
       {
@@ -29,7 +29,7 @@
       }
     ],
     "theme_color": "#FAB700",
-    "background_color": "#000",
+    "background_color": "#000000",
     "display": "standalone",
     "orientation": "portrait"
 }
