@@ -94,6 +94,7 @@ input#dep {min-width: 7rem;}
   
   /* Modal Content/Box */
   .modal-content {
+    font-size: 1.3rem;
     background-color: var(--bg);
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
