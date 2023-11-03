@@ -19,7 +19,7 @@ body {
 }
 a {color: #666;text-decoration: none;}
 #input {margin: 0; font-size: 42px;}
-#flip {line-height: 1.3em; cursor: pointer; color: var(--secondary);}
+#flip {line-height: 1.6rem; cursor: pointer; color: var(--secondary);}
 input {background-color: var(--bg);color: var(--text);font-size: 24px;}
 header, section, footer {margin: 0 10px;}
 header {margin: 10px;}
@@ -28,7 +28,7 @@ section {
     justify-content: center;
 }
 footer {text-align: center;}
-.input-field {align-items: flex-end;}
+.input-field {align-items: flex-end; min-height: 50px;}
 #wagons, #locos, #numpad {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
