@@ -1,4 +1,6 @@
-document.getElementById('date').valueAsDate = new Date();
+const datePicker = document.getElementById('date');
+// Set todays date
+datePicker.valueAsDate = new Date();
 // Referens to wagon input label
 const inp = document.getElementById('input');
 // Create numpad event listeners
@@ -124,7 +126,7 @@ function reverse() {
 }
 
 function createMail(load) {
-    const subject = 'Vagnsupptagning, ' + document.getElementById('otn').value + ', ' + document.getElementById('dep').value + ', ' + document.getElementById('date').value;
+    const subject = 'Vagnsupptagning, ' + document.getElementById('otn').value + ', ' + document.getElementById('dep').value + ', ' + datePicker.value;
     const loaded = (load) ? 'lastade' : 'tomma';
     const wagons = document.getElementById('wagons').children;
     // New line = %0D%0A
