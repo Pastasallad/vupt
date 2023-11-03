@@ -1,6 +1,19 @@
 const datePicker = document.getElementById('date');
 // Set todays date
 datePicker.valueAsDate = new Date();
+const btnSet = document.getElementById('cog');
+btnSet.addEventListener('click', function () {
+
+});
+const btnReset = document.getElementById('new');
+btnReset.addEventListener('click', function () {
+
+    
+    /*
+    if (confirm('Bekräfta ny vagnsupptagning?')) {
+        clearData();
+    }*/
+});
 // Referens to wagon input label
 const inp = document.getElementById('input');
 // Create numpad event listeners
@@ -129,11 +142,11 @@ function reverse() {
 }
 
 function saveWagons() {
-    setCookie('wagons',document.getElementById('wagons').innerHTML,2);
+    localStorage.setItem('wagons', wagons.innerHTML);
 }
 
 function loadWagons() {
-    getCookie('wagons');
+    wagons.innerHTML = localStorage.getItem('wagons');
 }
 
 function clearWagons() {
@@ -141,6 +154,10 @@ function clearWagons() {
 }
 
 function createMail(load) {
+    let email = localStorage.getItem('email');
+    if (email == null) {
+        email = '';
+    }
     const subject = 'Vagnsupptagning, ' + document.getElementById('otn').value + ', ' + document.getElementById('dep').value + ', ' + datePicker.value;
     const loaded = (load) ? 'lastade' : 'tomma';
     const wagons = document.getElementById('wagons').children;
@@ -160,7 +177,7 @@ function createMail(load) {
         body += (wagons[i].classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
         body += ((i+1) % 5 === 0) ? '%0D%0A' : '';
     }
-    window.location = 'mailto:' + getCookie('email') + '?subject=' + subject + '&body=' + body;
+    window.location = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
 }
 let saveMail = document.getElementById('saveMail');
 let modal = document.getElementById("modalSettings");
@@ -180,34 +197,10 @@ window.onclick = function(event) {
   }
 }
 function loadSettings() {
-    saveMail.value = getCookie('email');
+    saveMail.value = localStorage.getItem('email');
     saveMail.classList = '';
 }
 function saveSettings() {
-    const value = saveMail.value;
-    let exp = (value != '') ? 2*365 : -1; //Expiration 2 years or yesterday to delete
-    setCookie('email', value, exp);
-    saveMail.classList = 'saved'
+    localStorage.setItem('email',saveMail.value);
+    saveMail.classList = 'saved';
 }
-
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-  
-  function getCookie(cname) {
-    let name = cname + "=";
-    let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }

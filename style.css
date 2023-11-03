@@ -32,17 +32,17 @@ section, footer {margin: 0 10px;}
 header {
     margin: 10px;
     display: grid;
-    grid-template-columns: 0fr auto 0fr 0fr;
+    grid-template-columns: 0fr 0fr auto 0fr 0fr;
     gap: 5px;
 }
-header input, header div{
+header input, header button{
     display: flex;
     justify-content: center;
 }
-button, header div {cursor: pointer;}
-button:hover, header div:hover {
+button:hover {
     color: var(--orange);
 }
+#cog {font-size: 2rem; line-height: 0.8;}
 section {
     display: flex;
     justify-content: center;
@@ -58,7 +58,7 @@ footer {text-align: center;}
 #locos {grid-template-columns: repeat(3,1fr);}
 input#otn {min-width: 5rem;}
 input#dep {min-width: 7rem;}
-input#date {width: 1.8rem; border: none;}
+input#date {width: 1.8rem;}
 #wagons div, #locos div, #numpad div {
     display: flex;
     justify-content: center;

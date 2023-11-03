@@ -41,10 +41,11 @@
 </head>
 <body>
     <header>
+            <button id="new">↺</button>
             <input id="otn" type="text" inputmode="numeric" placeholder="Tågnr" maxlength="6">
             <input id="dep" type="text" placeholder="Avgångsplats" maxlength="20">
             <input id="date" type="date">
-            <div id="cog">⚙</div>
+            <button id="cog">⚙</button>
     </header>
     <section></section>
     <section>LOK</section>
@@ -53,17 +54,18 @@
     <section id="wagons"></section>
     <section class="input-field">
         <p id="input"></p>
+        <button onclick="loadWagons()"></button>
     </section>
     <section id="numpad">
         <div>1</div>
         <div>2</div>
         <div>3</div>
         <div>C</div>
-        
+
         <div>4</div>
         <div>5</div>
         <div>6</div>
-        <div>*</div> 
+        <div>*</div>
 
         <div>7</div>
         <div>8</div>
@@ -81,7 +83,6 @@
             <p>Mottagares e-post: (valfri)</p>
             <input id="saveMail" type="email" placeholder="Ange e-post">
             <button onclick="saveSettings()">Spara</button>
-            <p>Sparas i en <a href="https://www.cookiesandyou.com/">cookie.</a></p>
         </div>
   </div>
     <script src="logic.js"></script>
