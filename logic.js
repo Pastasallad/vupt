@@ -66,6 +66,7 @@ function getWagons() {
     for (const div of divs) {
         wagons.push(div.innerHTML);
     }
+    saveWagons();
     document.getElementById('count').innerHTML = wagons.length;
     return wagons;
 }
@@ -87,6 +88,7 @@ function mark() {
             }
         }
     }
+    saveWagons();
 }
 
 function corr() {
@@ -102,6 +104,7 @@ function corr() {
         inp.innerHTML = inp.innerHTML.slice(0,-1);
         inp.classList = '';
     }
+    saveWagons();
 }
 
 function rm(vehicle) {
@@ -123,6 +126,18 @@ function reverse() {
     }
     inp.innerHTML = '';
     inp.classList = '';
+}
+
+function saveWagons() {
+    setCookie('wagons',document.getElementById('wagons').innerHTML,2);
+}
+
+function loadWagons() {
+    getCookie('wagons');
+}
+
+function clearWagons() {
+
 }
 
 function createMail(load) {
