@@ -12,7 +12,7 @@ body {
     margin: auto;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, auto) 1fr auto;
+    grid-template-rows: repeat(6, auto) 1fr auto;
     height: 100vh;
     user-select: none;
     width: clamp(300px, 100%, 960px);
