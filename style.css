@@ -20,9 +20,25 @@ body {
 a {color: #666;text-decoration: none;}
 #input {margin: 0; font-size: 42px;}
 #flip {line-height: 1.6rem; cursor: pointer; color: var(--secondary);}
-input {background-color: var(--bg);color: var(--text);font-size: 24px;}
-header, section, footer {margin: 0 10px;}
-header {margin: 10px;}
+input {
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+    border: 1px solid var(--secondary);
+    line-height: 2rem;
+    font-size: 1.3rem;
+}
+section, footer {margin: 0 10px;}
+header {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 0fr auto auto;
+    gap: 5px;
+}
+header input{
+    display: flex;
+    justify-content: center;
+}
 section {
     display: flex;
     justify-content: center;
@@ -35,6 +51,9 @@ footer {text-align: center;}
     grid-template-rows: auto 1fr;
     gap: 5px;
 }
+#locos {grid-template-columns: repeat(3,1fr);}
+input#otn {min-width: 5rem;}
+input#dep {min-width: 7rem;}
 #wagons div, #locos div, #numpad div {
     display: flex;
     justify-content: center;
@@ -44,7 +63,6 @@ footer {text-align: center;}
     min-height: 1.5em;
 }
 #wagons div:active, #locos div:active, #numpad div:active { background-color: var(--orange); }
-#locos {grid-template-columns: repeat(3,1fr);}
 #numpad {
     grid-template-columns: repeat(4,1fr);
     margin-bottom: 10px;

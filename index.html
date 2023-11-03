@@ -41,14 +41,14 @@
 </head>
 <body>
     <header>
-        <b style="color:#FAB700;">V<span style="font-size: 18px;">UPT</span></b> 
-        <div style="float: right;">
-            <input id="otn" type="text" inputmode="numeric" placeholder="Train-ID" maxlength="5" size="5"><input id="route" type="text" placeholder="Dep" size="6">
-        </div>
+            <input id="otn" type="text" inputmode="numeric" placeholder="Tågnr" maxlength="5">
+            <input id="dep" type="text" placeholder="Avgångsplats" maxlength="20">
+            <input id="date" type="date">
     </header>
-    <section>LOCOS</section>
+    <section></section>
+    <section>LOK</section>
     <section id="locos"></section>
-    <section><span id="count">&nbsp;&nbsp;</span>&nbsp;WAGONS&nbsp;<span id="flip" onclick="reverse()">⇄</span></section>
+    <section><span id="count">&nbsp;&nbsp;</span>&nbsp;VAGNAR&nbsp;<span id="flip" onclick="reverse()">⇄</span></section>
     <section id="wagons"></section>
     <section class="input-field">
         <p id="input"></p>
