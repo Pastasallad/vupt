@@ -143,5 +143,54 @@ function createMail(load) {
         body += (wagons[i].classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
         body += ((i+1) % 5 === 0) ? '%0D%0A' : '';
     }
-    window.location = 'mailto:?subject=' + subject + '&body=' + body;
+    window.location = 'mailto:' + getCookie('email') + '?subject=' + subject + '&body=' + body;
 }
+let saveMail = document.getElementById('saveMail');
+let modal = document.getElementById("modalSettings");
+let cog = document.getElementById("cog");
+let span = document.getElementsByClassName("close")[0];
+cog.onclick = function() {
+  modal.style.display = "block";
+  loadSettings();
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+function loadSettings() {
+    saveMail.value = getCookie('email');
+    saveMail.classList = '';
+}
+function saveSettings() {
+    const value = saveMail.value;
+    let exp = (value != '') ? 2*365 : -1; //Expiration 2 years or yesterday to delete
+    setCookie('email', value, exp);
+    saveMail.classList = 'saved'
+}
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+  
+  function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }

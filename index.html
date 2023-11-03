@@ -44,6 +44,7 @@
             <input id="otn" type="text" inputmode="numeric" placeholder="Tågnr" maxlength="5">
             <input id="dep" type="text" placeholder="Avgångsplats" maxlength="20">
             <input id="date" type="date">
+            <div id="cog">⚙</div>
     </header>
     <section></section>
     <section>LOK</section>
@@ -74,6 +75,15 @@
         <div>.</div>
         <div>LAST</div>
     </section>
+    <div id="modalSettings" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Mottagares e-post: (valfri)</p>
+            <input id="saveMail" type="email" placeholder="Ange e-post">
+            <button onclick="saveSettings()">Spara</button>
+            <p>Sparas i en <a href="https://www.cookiesandyou.com/">cookie.</a></p>
+        </div>
+  </div>
     <script src="logic.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
