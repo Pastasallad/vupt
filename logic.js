@@ -3,7 +3,7 @@ const datePicker = document.getElementById('date');
 datePicker.valueAsDate = new Date();
 const btnSet = document.getElementById('cog');
 btnSet.onclick = function() {
-
+    
 }
 const btnReset = document.getElementById('new');
 btnReset.onclick = function() {
