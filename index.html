@@ -54,7 +54,6 @@
     <section id="wagons"></section>
     <section class="input-field">
         <p id="input"></p>
-        <button onclick="loadWagons()"></button>
     </section>
     <section id="numpad">
         <div>1</div>
@@ -83,6 +82,7 @@
             <p>Mottagares e-post: (valfri)</p>
             <input id="saveMail" type="email" placeholder="Ange e-post">
             <button onclick="saveSettings()">Spara</button>
+            <button onclick="localStorage.clear()">Rensa appdata</button>
         </div>
   </div>
     <script src="logic.js"></script>

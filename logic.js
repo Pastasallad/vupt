@@ -2,24 +2,21 @@ const datePicker = document.getElementById('date');
 // Set todays date
 datePicker.valueAsDate = new Date();
 const btnSet = document.getElementById('cog');
-btnSet.addEventListener('click', function () {
+btnSet.onclick = function() {
 
-});
+}
 const btnReset = document.getElementById('new');
-btnReset.addEventListener('click', function () {
-
-    
-    /*
+btnReset.onclick = function() {
     if (confirm('Bekräfta ny vagnsupptagning?')) {
         clearData();
-    }*/
-});
+    }
+}
 // Referens to wagon input label
 const inp = document.getElementById('input');
 // Create numpad event listeners
 var keys = document.getElementById('numpad').children;
 for (let key of keys) {
-    key.addEventListener('click', function () {
+    key.onclick = function() {
         const value = key.innerHTML;
         switch (value) {
             case '*':
@@ -38,7 +35,7 @@ for (let key of keys) {
                 enter(value);
                 break;
         }
-    });
+    }
 }
 // Enter digit, '.' or 'T'
 function enter(n) {
@@ -185,7 +182,6 @@ let cog = document.getElementById("cog");
 let span = document.getElementsByClassName("close")[0];
 cog.onclick = function() {
   modal.style.display = "block";
-  loadSettings();
 }
 span.onclick = function() {
   modal.style.display = "none";
@@ -198,9 +194,10 @@ window.onclick = function(event) {
 }
 function loadSettings() {
     saveMail.value = localStorage.getItem('email');
-    saveMail.classList = '';
 }
 function saveSettings() {
     localStorage.setItem('email',saveMail.value);
     saveMail.classList = 'saved';
 }
+loadSettings();
+loadWagons();
