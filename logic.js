@@ -1,12 +1,22 @@
 const datePicker = document.getElementById('date');
 // Set todays date
 datePicker.valueAsDate = new Date();
+const btnSet = document.getElementById('cog');
+btnSet.onclick = function() {
+    
+}
+const btnReset = document.getElementById('new');
+btnReset.onclick = function() {
+    if (confirm('Bekräfta ny vagnsupptagning?')) {
+        clearData();
+    }
+}
 // Referens to wagon input label
 const inp = document.getElementById('input');
 // Create numpad event listeners
 var keys = document.getElementById('numpad').children;
 for (let key of keys) {
-    key.addEventListener('click', function () {
+    key.onclick = function() {
         const value = key.innerHTML;
         switch (value) {
             case '*':
@@ -25,7 +35,7 @@ for (let key of keys) {
                 enter(value);
                 break;
         }
-    });
+    }
 }
 // Enter digit, '.' or 'T'
 function enter(n) {
@@ -66,6 +76,7 @@ function getWagons() {
     for (const div of divs) {
         wagons.push(div.innerHTML);
     }
+    saveWagons();
     document.getElementById('count').innerHTML = wagons.length;
     return wagons;
 }
@@ -87,6 +98,7 @@ function mark() {
             }
         }
     }
+    saveWagons();
 }
 
 function corr() {
@@ -102,6 +114,7 @@ function corr() {
         inp.innerHTML = inp.innerHTML.slice(0,-1);
         inp.classList = '';
     }
+    saveWagons();
 }
 
 function rm(vehicle) {
@@ -125,7 +138,23 @@ function reverse() {
     inp.classList = '';
 }
 
+function saveWagons() {
+    localStorage.setItem('wagons', wagons.innerHTML);
+}
+
+function loadWagons() {
+    wagons.innerHTML = localStorage.getItem('wagons');
+}
+
+function clearWagons() {
+
+}
+
 function createMail(load) {
+    let email = localStorage.getItem('email');
+    if (email == null) {
+        email = '';
+    }
     const subject = 'Vagnsupptagning, ' + document.getElementById('otn').value + ', ' + document.getElementById('dep').value + ', ' + datePicker.value;
     const loaded = (load) ? 'lastade' : 'tomma';
     const wagons = document.getElementById('wagons').children;
@@ -145,7 +174,7 @@ function createMail(load) {
         body += (wagons[i].classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
         body += ((i+1) % 5 === 0) ? '%0D%0A' : '';
     }
-    window.location = 'mailto:' + getCookie('email') + '?subject=' + subject + '&body=' + body;
+    window.location = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
 }
 let saveMail = document.getElementById('saveMail');
 let modal = document.getElementById("modalSettings");
@@ -153,7 +182,6 @@ let cog = document.getElementById("cog");
 let span = document.getElementsByClassName("close")[0];
 cog.onclick = function() {
   modal.style.display = "block";
-  loadSettings();
 }
 span.onclick = function() {
   modal.style.display = "none";
@@ -165,34 +193,11 @@ window.onclick = function(event) {
   }
 }
 function loadSettings() {
-    saveMail.value = getCookie('email');
-    saveMail.classList = '';
+    saveMail.value = localStorage.getItem('email');
 }
 function saveSettings() {
-    const value = saveMail.value;
-    let exp = (value != '') ? 2*365 : -1; //Expiration 2 years or yesterday to delete
-    setCookie('email', value, exp);
-    saveMail.classList = 'saved'
+    localStorage.setItem('email',saveMail.value);
+    saveMail.classList = 'saved';
 }
-
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
-  
-  function getCookie(cname) {
-    let name = cname + "=";
-    let ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
+loadSettings();
+loadWagons();
