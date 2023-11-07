@@ -8,7 +8,7 @@ btnSet.onclick = function() {
 const btnReset = document.getElementById('new');
 btnReset.onclick = function() {
     if (confirm('Bekräfta ny vagnsupptagning?')) {
-        clearData();
+        clearWagons();
     }
 }
 // Referens to wagon input label
@@ -147,7 +147,8 @@ function loadWagons() {
 }
 
 function clearWagons() {
-
+    localStorage.removeItem('wagons');
+    wagons = '';
 }
 
 function createMail(load) {

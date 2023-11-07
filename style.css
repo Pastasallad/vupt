@@ -43,7 +43,7 @@ button {cursor: pointer; color: rgba(255, 255, 255, 1);}
 button:hover {
     color: var(--orange);
 }
-#cog {font-size: 2rem; line-height: 0.8;}
+#cog {font-size: 2rem; line-height: 0.9;}
 section {
     display: flex;
     justify-content: center;
