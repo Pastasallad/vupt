@@ -19,7 +19,8 @@ body {
 }
 a {color: #666;text-decoration: none;}
 #input {margin: 0; font-size: 42px;}
-#flip {line-height: 1.6rem; cursor: pointer; color: var(--secondary);}
+#flip {cursor: pointer;}
+#flip:hover svg {stroke: var(--orange);}
 input, button, #date-div {
     background-color: var(--bg);
     color: var(--text);
