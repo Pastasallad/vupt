@@ -20,7 +20,7 @@ body {
 a {color: #666;text-decoration: none;}
 #input {margin: 0; font-size: 42px;}
 #flip {line-height: 1.6rem; cursor: pointer; color: var(--secondary);}
-input, button {
+input, button, #date-div {
     background-color: var(--bg);
     color: var(--text);
     font-size: 1rem;
@@ -35,15 +35,25 @@ header {
     grid-template-columns: 0fr 0fr auto 0fr 0fr;
     gap: 5px;
 }
+#new:hover svg, #set:hover svg, #date-div:hover svg {fill: var(--orange);}
+svg {display: block;margin: auto;height: 100%;}
 header input, header button{
     display: flex;
     justify-content: center;
 }
 button {cursor: pointer; color: rgba(255, 255, 255, 1);}
-button:hover {
-    color: var(--orange);
+input#otn {min-width: 5rem;}
+input#dep {min-width: 7rem;}
+input#date {
+    opacity: 0;
+    width: 1.8rem;
+    margin-top: -1.7em;
 }
-#cog {font-size: 2rem; line-height: 0.9;}
+#new, #date-div, #set {width: 1.8rem;}
+input label {
+    display: block;
+    width: 1.8rem;
+}
 section {
     display: flex;
     justify-content: center;
@@ -57,9 +67,6 @@ footer {text-align: center;}
     gap: 5px;
 }
 #locos {grid-template-columns: repeat(3,1fr);}
-input#otn {min-width: 5rem;}
-input#dep {min-width: 7rem;}
-input#date {width: 1.8rem;}
 #wagons div, #locos div, #numpad div {
     display: flex;
     justify-content: center;

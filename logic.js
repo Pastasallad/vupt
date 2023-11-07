@@ -1,7 +1,7 @@
 const datePicker = document.getElementById('date');
 // Set todays date
 datePicker.valueAsDate = new Date();
-const btnSet = document.getElementById('cog');
+const btnSet = document.getElementById('set');
 btnSet.onclick = function() {
     
 }
@@ -179,7 +179,7 @@ function createMail(load) {
 }
 let saveMail = document.getElementById('saveMail');
 let modal = document.getElementById("modalSettings");
-let cog = document.getElementById("cog");
+let cog = document.getElementById("set");
 let span = document.getElementsByClassName("close")[0];
 cog.onclick = function() {
   modal.style.display = "block";
