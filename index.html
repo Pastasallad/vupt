@@ -2,6 +2,7 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Installerbar webbapp för att underlätta vagnsupptagningar.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vagnsupptagning</title>
     <link rel="manifest" href="manifest.json">
@@ -41,16 +42,16 @@
 </head>
 <body>
     <header>
-            <button id="new"><svg fill="#999" width="18px" height="18px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+            <button id="new" aria-label="Ny vagnsupptagning"><svg fill="#999" width="18px" height="18px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                 <path d="M960 0v213.333c411.627 0 746.667 334.934 746.667 746.667S1371.627 1706.667 960 1706.667 213.333 1371.733 213.333 960c0-197.013 78.4-382.507 213.334-520.747v254.08H640V106.667H53.333V320h191.04C88.64 494.08 0 720.96 0 960c0 529.28 430.613 960 960 960s960-430.72 960-960S1489.387 0 960 0" fill-rule="evenodd"/>
             </svg></button>
             <input id="otn" type="text" inputmode="numeric" placeholder="Tågnr" maxlength="6" onchange="saveOtn()">
             <input id="dep" type="text" placeholder="Avgångsplats" maxlength="20" onchange="saveDep()">
             <div id="date-div">
-                <label for="date"><svg fill="#999" width="23px" height="23px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6,22H18a3,3,0,0,0,3-3V7a2,2,0,0,0-2-2H17V3a1,1,0,0,0-2,0V5H9V3A1,1,0,0,0,7,3V5H5A2,2,0,0,0,3,7V19A3,3,0,0,0,6,22ZM5,12.5a.5.5,0,0,1,.5-.5h13a.5.5,0,0,1,.5.5V19a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1Z"/></svg></label>
+                <label for="date" aria-label="Datum"><svg fill="#999" width="23px" height="23px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6,22H18a3,3,0,0,0,3-3V7a2,2,0,0,0-2-2H17V3a1,1,0,0,0-2,0V5H9V3A1,1,0,0,0,7,3V5H5A2,2,0,0,0,3,7V19A3,3,0,0,0,6,22ZM5,12.5a.5.5,0,0,1,.5-.5h13a.5.5,0,0,1,.5.5V19a1,1,0,0,1-1,1H6a1,1,0,0,1-1-1Z"/></svg></label>
                 <input id="date" type="date">
             </div>
-            <button id="set"><svg 
+            <button id="set" aria-label="Inställningar"><svg 
                 viewBox="0 0 600 600"
                 width="18px"
                 height="18px"
