@@ -17,14 +17,15 @@ body {
     user-select: none;
     width: clamp(300px, 100%, 960px);
 }
-a {color: #666;text-decoration: none;}
-#input {margin: 0; font-size: 42px;}
-#flip {cursor: pointer;}
+#input {
+    margin: 0;
+    font-size: 42px;
+}
+button, #flip {cursor: pointer;}
 #flip:hover svg {stroke: var(--orange);}
 input, button, #date-div {
-    background-color: var(--bg);
+    background-color: transparent;
     color: var(--text);
-    font-size: 1rem;
     border: 1px solid var(--secondary);
     line-height: 2rem;
     font-size: 1.3rem;
@@ -36,21 +37,30 @@ header {
     grid-template-columns: 0fr 0fr auto 0fr 0fr;
     gap: 5px;
 }
-#new:hover svg, #set:hover svg, #date-div:hover svg {fill: var(--orange);}
+button#new {
+    background: transparent url('../svg/new.svg') no-repeat center;
+    width: 32px;
+}
+button#set {
+    background: transparent url('../svg/settings.svg') no-repeat center;
+    width: 32px;
+    background-size: 18px;
+}
+#date-div {width: 32px;}
 svg {display: block;margin: auto;height: 100%;}
 header input, header button{
     display: flex;
     justify-content: center;
 }
-button {cursor: pointer; color: rgba(255, 255, 255, 1);}
-input#otn {min-width: 5rem;}
-input#dep {min-width: 7rem;}
-input#date {
+input {padding-left: 6px;}
+
+#otn {min-width: 5rem;}
+#dep {min-width: 7rem;}
+#date {
     opacity: 0;
     width: 1.8rem;
     margin-top: -1.7em;
 }
-#new, #date-div, #set {width: 1.8rem;}
 input label {
     display: block;
     width: 1.8rem;
