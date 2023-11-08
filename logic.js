@@ -1,18 +1,17 @@
+// Element references
+const otn = document.getElementById('otn');
+const dep = document.getElementById('dep');
 const datePicker = document.getElementById('date');
-// Set todays date
-datePicker.valueAsDate = new Date();
 const btnSet = document.getElementById('set');
-btnSet.onclick = function() {
-    
-}
 const btnReset = document.getElementById('new');
-btnReset.onclick = function() {
-    if (confirm('Bekräfta ny vagnsupptagning?')) {
-        clearWagons();
-    }
-}
-// Referens to wagon input label
 const inp = document.getElementById('input');
+const wagonSection = document.getElementById('wagons');
+const locoSection = document.getElementById('locos');
+const wagonCounter = document.getElementById('count');
+const saveMail = document.getElementById('saveMail');
+const modal = document.getElementById("modalSettings");
+const cog = document.getElementById("set");
+const span = document.getElementsByClassName("close")[0];
 // Create numpad event listeners
 var keys = document.getElementById('numpad').children;
 for (let key of keys) {
@@ -37,6 +36,15 @@ for (let key of keys) {
         }
     }
 }
+// Set todays date
+datePicker.valueAsDate = new Date();
+// Clear data
+btnReset.onclick = function() {
+    if (confirm('Bekräfta ny vagnsupptagning?')) {
+        newTrain();
+    }
+}
+
 // Enter digit, '.' or 'T'
 function enter(n) {
     if (inp.classList.contains('valid')) {
@@ -52,49 +60,58 @@ function enter(n) {
 function validate() {
     const value = inp.innerHTML;
     if (value.length === 4 && /^\d+$/.test(value)) {
-        valid(value,'wagons');
+        valid(value,wagonSection);
     } else if (value.length === 7) {
-        valid(value,'locos');
+        valid(value,locoSection);
     }
 }
 
 // Create object div
-function valid(value,type) {
+function valid(value,section) {
     if (getWagons().includes(value)) {
         alert('Wagon already added!');
         inp.innerHTML = inp.innerHTML.slice(0,-1);
     } else {
-        document.getElementById(type).innerHTML += '<div onclick="rm(this)">' + value + '</div>';
+        section.innerHTML += '<div onclick="rm(this)">' + value + '</div>';
         inp.classList.add('valid');
-        getWagons();
+        if (section == locoSection) {
+            saveLocos();
+        } else {
+            saveWagons();
+            countWagons();
+        }
     }
 }
 
+// Returns array of wagon numbers
 function getWagons() {
     let wagons = [];
-    let divs = document.getElementById('wagons').children;
+    let divs = wagonSection.children;
     for (const div of divs) {
         wagons.push(div.innerHTML);
     }
-    saveWagons();
-    document.getElementById('count').innerHTML = wagons.length;
     return wagons;
 }
+// Update counter
+function countWagons() {
+    wagonCounter.innerHTML = wagonSection.childElementCount;
+}
+// Mark wagon
 function mark() {
     if (inp.classList.contains('valid')) {
         if (inp.classList.contains('caution')) {
             inp.classList.remove('caution');
             if (inp.innerHTML.length > 4) {
-                document.getElementById('locos').lastChild.classList.remove('caution');
+                locoSection.lastChild.classList.remove('caution');
             } else {
-                document.getElementById('wagons').lastChild.classList.remove('caution');
+                wagonSection.lastChild.classList.remove('caution');
             }
         } else {
             inp.classList.add('caution');
             if (inp.innerHTML.length > 4) {
-                document.getElementById('locos').lastChild.classList.add('caution');
+                locoSection.lastChild.classList.add('caution');
             } else {
-                document.getElementById('wagons').lastChild.classList.add('caution');
+                wagonSection.lastChild.classList.add('caution');
             }
         }
     }
@@ -105,27 +122,31 @@ function corr() {
     if (inp.innerHTML.length > 0) {
         if (inp.classList.length !== 0) { // valid or marked === vehicle added, so remove
             if (inp.innerHTML.length > 4) { // loco
-                document.getElementById('locos').lastChild.remove();
+                locoSection.lastChild.remove();
+                saveLocos();
             } else { // wagon
-                document.getElementById('wagons').lastChild.remove();
-                getWagons();
+                wagonSection.lastChild.remove();
+                saveWagons();
+                countWagons();
             }
         }
         inp.innerHTML = inp.innerHTML.slice(0,-1);
         inp.classList = '';
     }
-    saveWagons();
 }
 
 function rm(vehicle) {
     if (confirm('Remove ' + vehicle.innerHTML + '?')) {
         vehicle.remove();
-        getWagons();
+        saveLocos();
+        saveWagons();
+        countWagons();
     }
 }
 
+// Flip wagon order
 function reverse() {
-    const list = document.getElementById('wagons');
+    const list = wagonSection;
     let divs = [];
     for (let i = 0; i < list.children.length; i++) {
         divs[i] = list.children[i];
@@ -136,19 +157,39 @@ function reverse() {
     }
     inp.innerHTML = '';
     inp.classList = '';
+    saveWagons();
 }
 
+function saveOtn() {
+    localStorage.setItem('otn', otn.value);
+}
+function saveDep() {
+    localStorage.setItem('dep', dep.value);
+}
 function saveWagons() {
-    localStorage.setItem('wagons', wagons.innerHTML);
+    localStorage.setItem('wagons', wagonSection.innerHTML);
 }
-
-function loadWagons() {
-    wagons.innerHTML = localStorage.getItem('wagons');
+function saveLocos() {
+    localStorage.setItem('locos', locoSection.innerHTML);
 }
-
-function clearWagons() {
+function loadTrain() {
+    otn.value = localStorage.getItem('otn');
+    dep.value = localStorage.getItem('dep');
+    locoSection.innerHTML = localStorage.getItem('locos');
+    wagonSection.innerHTML = localStorage.getItem('wagons');
+    countWagons();
+}
+function newTrain() {
+    localStorage.removeItem('otn');
+    localStorage.removeItem('dep');
+    localStorage.removeItem('locos');
     localStorage.removeItem('wagons');
-    wagons = '';
+
+    otn.value = '';
+    dep.value = '';
+    locoSection.innerHTML = '';
+    wagonSection.innerHTML = '';
+    countWagons();
 }
 
 function createMail(load) {
@@ -156,14 +197,14 @@ function createMail(load) {
     if (email == null) {
         email = '';
     }
-    const subject = 'Vagnsupptagning, ' + document.getElementById('otn').value + ', ' + document.getElementById('dep').value + ', ' + datePicker.value;
+    const subject = 'Vagnsupptagning, ' + otn.value + ', ' + dep.value + ', ' + datePicker.value;
     const loaded = (load) ? 'lastade' : 'tomma';
-    const wagons = document.getElementById('wagons').children;
+    const wagons = wagonSection.children;
     // New line = %0D%0A
     let body = 'Hej!%0D%0A%0D%0A' + wagons.length + ' '+ 
     loaded + ' vagnar.%0D%0A%0D%0A';
 
-    for (const loco of document.getElementById('locos').children) {
+    for (const loco of locoSection.children) {
         body += loco.innerHTML;
         body += (loco.classList.contains('caution')) ? ' *%0D%0A' : '%0D%0A';
     }
@@ -177,10 +218,7 @@ function createMail(load) {
     }
     window.location = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
 }
-let saveMail = document.getElementById('saveMail');
-let modal = document.getElementById("modalSettings");
-let cog = document.getElementById("set");
-let span = document.getElementsByClassName("close")[0];
+// Modal
 cog.onclick = function() {
   modal.style.display = "block";
 }
@@ -200,5 +238,7 @@ function saveSettings() {
     localStorage.setItem('email',saveMail.value);
     saveMail.classList = 'saved';
 }
+
+// Init
 loadSettings();
-loadWagons();
+loadTrain();
