@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vagnsupptagning</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="apple-touch-icon" href="icons/apple-icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-startup-image" href="icons/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
@@ -112,12 +112,7 @@
             <button onclick="saveSettings()">Spara</button>
             <button onclick="localStorage.clear()">Rensa appdata</button>
         </div>
-  </div>
-    <script src="main.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js');
-        }
-    </script>
+    </div>
+    <script src="js/main.js"></script>
 </body>
 </html>
