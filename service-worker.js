@@ -1,13 +1,10 @@
-const cacheName = 'v1';
+const cacheName = 'v4';
 const precachedResources = [
   '/index.html',
   '/css/style.css',
   '/js/main.js',
   '/svg/new.svg',
-  '/svg/settings.svg',
-  '/manifest.json',
-  '/favicon.ico',
-  '/icons/apple-icon-180.png'
+  '/svg/settings.svg'
 ];
 
 async function precache() {
