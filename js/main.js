@@ -1,19 +1,11 @@
-// Register the service worker
 if ('serviceWorker' in navigator) {
-    // Wait for the 'load' event to not block other work
-    window.addEventListener('load', async () => {
-      // Try to register the service worker.
-      try {
-        // Capture the registration for later use, if needed
-        let reg = await navigator.serviceWorker.register('service-worker.js');
-  
-        console.log('Service worker registered! 😎', reg);
-      } catch (err) {
-        console.log('😥 Service worker registration failed: ', err);
-      }
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register('../service-worker.js')
+            .then(reg => console.log('Service Worker: Registered'))
+            .catch(err => console.log(`Service Worker: Error: ${err}`))
     });
 }
-
 // Element references
 const otn = document.getElementById('otn');
 const dep = document.getElementById('dep');
@@ -54,13 +46,12 @@ for (let key of keys) {
 }
 // Set todays date
 datePicker.valueAsDate = new Date();
-// Clear data
+// Clear train
 btnReset.onclick = function() {
     if (confirm('Bekräfta ny vagnsupptagning?')) {
         newTrain();
     }
 }
-
 // Enter digit, '.' or 'T'
 function enter(n) {
     if (inp.classList.contains('valid')) {
@@ -71,7 +62,6 @@ function enter(n) {
         validate();
     }
 }
-
 // Check only numbers for wagon or '.' or 'T' for loco
 function validate() {
     const value = inp.innerHTML;
@@ -81,7 +71,6 @@ function validate() {
         valid(value,locoSection);
     }
 }
-
 // Create object div
 function valid(value,section) {
     if (getWagons().includes(value)) {
@@ -98,7 +87,6 @@ function valid(value,section) {
         }
     }
 }
-
 // Returns array of wagon numbers
 function getWagons() {
     let wagons = [];
@@ -133,7 +121,7 @@ function mark() {
     }
     saveWagons();
 }
-
+// Correct input
 function corr() {
     if (inp.innerHTML.length > 0) {
         if (inp.classList.length !== 0) { // valid or marked === vehicle added, so remove
@@ -150,7 +138,7 @@ function corr() {
         inp.classList = '';
     }
 }
-
+// Remove vehicle
 function rm(vehicle) {
     if (confirm('Remove ' + vehicle.innerHTML + '?')) {
         vehicle.remove();
@@ -159,7 +147,6 @@ function rm(vehicle) {
         countWagons();
     }
 }
-
 // Flip wagon order
 function reverse() {
     const list = wagonSection;
@@ -175,7 +162,7 @@ function reverse() {
     inp.classList = '';
     saveWagons();
 }
-
+// Save to local storage
 function saveOtn() {
     localStorage.setItem('otn', otn.value);
 }
@@ -234,7 +221,7 @@ function createMail(load) {
     }
     window.location = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
 }
-// Modal
+// Modal popup
 cog.onclick = function() {
   modal.style.display = "block";
 }

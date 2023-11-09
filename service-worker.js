@@ -1,27 +1,60 @@
-// Choose a cache name
-const cacheName = 'cache-v1';
-// List the files to precache
-const precacheResources = ['index.html', 'css/style.css', 'js/main.js', 'manifest.json'];
+const cacheName = 'v1';
+const precachedResources = [
+  '/index.html',
+  '/css/style.css',
+  '/js/main.js',
+  '/svg/new.svg',
+  '/svg/settings.svg',
+  '/manifest.json',
+  '/favicon.ico',
+  '/icons/apple-icon-180.png'
+];
 
-// When the service worker is installing, open the cache and add the precache resources to it
-self.addEventListener('install', (event) => {
-  console.log('Service worker install event!');
-  event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(precacheResources)));
+async function precache() {
+  const cache = await caches.open(cacheName);
+  return cache.addAll(precachedResources);
+}
+
+// Cache first with refresh
+function isCacheable(request) {
+  const url = new URL(request.url);
+  return !url.pathname.endsWith(".json");
+}
+
+async function cacheFirstWithRefresh(request) {
+  const fetchResponsePromise = fetch(request).then(async (networkResponse) => {
+    if (networkResponse.ok) {
+      const cache = await caches.open(cacheName);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  });
+
+  return (await caches.match(request)) || (await fetchResponsePromise);
+}
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(precache());
 });
 
-self.addEventListener('activate', (event) => {
-  console.log('Service worker activate event!');
+self.addEventListener('activate', e => {
+  console.log('Service Worker: Activated');
+  e.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cache => {
+          if (cache !== cacheName) {
+            console.log('Service Worker: Clearing old cache');
+            return caches.delete(cache);
+          }
+        })
+      )
+    })
+  )
 });
 
-// When there's an incoming fetch request, try and respond with a precached resource, otherwise fall back to the network
-self.addEventListener('fetch', (event) => {
-  console.log('Fetch intercepted for:', event.request.url);
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request);
-    }),
-  );
+self.addEventListener("fetch", (event) => {
+  if (isCacheable(event.request)) {
+    event.respondWith(cacheFirstWithRefresh(event.request));
+  }
 });
