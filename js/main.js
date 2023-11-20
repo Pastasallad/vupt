@@ -44,8 +44,6 @@ for (let key of keys) {
         }
     }
 }
-// Set todays date
-datePicker.valueAsDate = new Date();
 // Clear train
 btnReset.onclick = function() {
     if (confirm('Bekräfta ny vagnsupptagning?')) {
@@ -192,6 +190,7 @@ function newTrain() {
     dep.value = '';
     locoSection.innerHTML = '';
     wagonSection.innerHTML = '';
+    datePicker.valueAsDate = new Date();
     countWagons();
 }
 
@@ -245,3 +244,4 @@ function saveSettings() {
 // Init
 loadSettings();
 loadTrain();
+datePicker.valueAsDate = new Date();
