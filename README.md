@@ -18,5 +18,5 @@ Enkel installerbar webb applikation för att underlätta vagnsupptagningar.
     - Försöker man lägga till samma vagn mer än en gång får man en varning.
 * C ångrar senaste tecknet.
 * Asterisk (*) markerar den vagn man senast matat in.
-* För att ta bort en vagn eller lok klickar på den och bekräftar.
+* För att ta bort en vagn eller lok klickar man på den och bekräftar.
 * TOM respektive LAST skapar ett utkast i din e-post applikation.
