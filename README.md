@@ -4,8 +4,7 @@ Enkel installerbar webb applikation för att underlätta vagnsupptagningar.
 ## Installation
 Det skiljer lite mellan olika kombinationer av webbläsare och operativsystem. Men i regel surfar man in på [vupt.hrms.se](https://vupt.hrms.se), väljer inställningar (ofta _tre prickar_) och _installera/lägg till på hemskärm_.
 
-### Android
-Om du har flera profiler på din android-telefon, installera på den profil du har din mail du vill skicka ifrån.
+**Android:** Om du har flera profiler på din android-telefon, installera på den profil du har din mail du vill skicka ifrån.
 
 [Mer information om installation av PWA på olika enheter](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Installing)
 
